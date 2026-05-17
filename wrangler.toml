@@ -1,0 +1,5 @@
+name = "cjstrategies-org"
+compatibility_date = "2025-01-01"
+
+[assets]
+directory = "./ui_kits/website"
