@@ -1,0 +1,315 @@
+/* ==========================================================================
+   Casey Jones Strategies — Foundational Tokens
+   Colors, type, spacing, radii, shadows, motion.
+   Imported by every UI kit + preview card in this design system.
+   ========================================================================== */
+
+/* ---------- Webfonts ----------
+   Display:  DM Serif Display  — editorial gravitas, civic confidence
+   Body:     Public Sans       — USWDS civic system font, trustworthy
+   Mono:     IBM Plex Mono     — eyebrows, trust pills, labels, ticker
+*/
+@import url("https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Public+Sans:ital,wght@0,300..900;1,300..900&family=IBM+Plex+Mono:wght@300;400;500;600&display=swap");
+
+:root {
+  /* ------------------------------------------------------------------
+     COLOR — Brand palette (verbatim from brand direction)
+     ------------------------------------------------------------------ */
+  --ink:           #07121d;  /* deep navy / ink — primary background    */
+  --rich-navy:     #102235;  /* rich navy — secondary background        */
+  --deep-blue:     #173044;  /* deep blue — card surfaces on dark       */
+  --river-blue:    #1f6f8b;  /* river blue — accent, link, water glow   */
+  --warm-cream:    #f5ecd9;  /* warm cream — light surface, paper       */
+  --paper-cream:   #fffaf0;  /* paper cream — lightest surface          */
+  --gold:          #d9a441;  /* muted gold — civic accent, brassy       */
+  --sage:          #8fae90;  /* sage green — supporting, calming        */
+  --rust:          #b8643f;  /* clay / rust — alarm, mission urgency    */
+  --white:         #ffffff;
+
+  /* ------------------------------------------------------------------
+     COLOR — Semantic roles
+     ------------------------------------------------------------------ */
+  /* Surfaces (dark mode default — campaign hero, sections) */
+  --bg:            var(--ink);
+  --bg-elev-1:     var(--rich-navy);
+  --bg-elev-2:     var(--deep-blue);
+
+  /* Surfaces (light mode — paper, story, transparency sections) */
+  --paper:         var(--paper-cream);
+  --paper-warm:    var(--warm-cream);
+
+  /* Text on dark */
+  --fg:            var(--paper-cream);
+  --fg-muted:      rgba(255, 250, 240, 0.72);
+  --fg-dim:        rgba(255, 250, 240, 0.48);
+  --fg-faint:      rgba(255, 250, 240, 0.18);
+
+  /* Text on light */
+  --ink-fg:        var(--ink);
+  --ink-fg-muted:  rgba(7, 18, 29, 0.72);
+  --ink-fg-dim:    rgba(7, 18, 29, 0.52);
+  --ink-fg-faint:  rgba(7, 18, 29, 0.16);
+
+  /* Accents / actions */
+  --accent:        var(--gold);          /* primary accent — eyebrows, marks */
+  --accent-water:  var(--river-blue);    /* link, water-feature glow         */
+  --accent-leaf:   var(--sage);          /* supporting, "stay/preserve"      */
+  --accent-fire:   var(--rust);          /* urgent, "see/displacement"       */
+
+  /* Borders (hairlines, civic ledger feel) */
+  --rule:          rgba(255, 250, 240, 0.14);
+  --rule-strong:   rgba(255, 250, 240, 0.28);
+  --rule-ink:      rgba(7, 18, 29, 0.16);
+  --rule-ink-strong: rgba(7, 18, 29, 0.32);
+
+  /* States */
+  --focus:         var(--gold);
+  --danger:        var(--rust);
+  --ok:            var(--sage);
+  --info:          var(--river-blue);
+
+  /* ------------------------------------------------------------------
+     TYPE — Families
+     ------------------------------------------------------------------ */
+  --font-display: "DM Serif Display", "Source Serif Pro", Georgia, serif;
+  --font-sans:    "Public Sans", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  --font-mono:    "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+
+  /* ------------------------------------------------------------------
+     TYPE — Scale (clamped for responsive)
+     Editorial display sizes intentionally large for the "movement poster" feel.
+     ------------------------------------------------------------------ */
+  --t-hero:    clamp(3.25rem, 7.5vw + 1rem, 7.5rem);   /* 52 → 120  */
+  --t-display: clamp(2.5rem, 4.5vw + 0.5rem, 4.75rem); /* 40 → 76   */
+  --t-h1:      clamp(2rem, 2.4vw + 1rem, 3.25rem);     /* 32 → 52   */
+  --t-h2:      clamp(1.625rem, 1.4vw + 1rem, 2.375rem);/* 26 → 38   */
+  --t-h3:      clamp(1.25rem, 0.6vw + 1rem, 1.625rem); /* 20 → 26   */
+  --t-lead:    clamp(1.0625rem, 0.4vw + 1rem, 1.25rem);/* 17 → 20   */
+  --t-body:    1rem;            /* 16 — body                          */
+  --t-small:   0.875rem;        /* 14 — small body, footnotes         */
+  --t-micro:   0.75rem;         /* 12 — eyebrow micro, pill caps      */
+
+  /* Line heights */
+  --lh-tight:  1.04;            /* display headlines                    */
+  --lh-snug:   1.18;            /* h2/h3                                */
+  --lh-body:   1.55;            /* paragraph                            */
+  --lh-loose:  1.7;             /* longer prose, civic copy             */
+
+  /* Tracking */
+  --tr-tight:    -0.02em;
+  --tr-display:  -0.01em;
+  --tr-normal:   0;
+  --tr-pill:     0.08em;
+  --tr-eyebrow:  0.18em;        /* eyebrows / civic labels — wide caps */
+
+  /* ------------------------------------------------------------------
+     SPACE — 4pt baseline, civic rhythm
+     ------------------------------------------------------------------ */
+  --s-1:  4px;
+  --s-2:  8px;
+  --s-3:  12px;
+  --s-4:  16px;
+  --s-5:  24px;
+  --s-6:  32px;
+  --s-7:  48px;
+  --s-8:  64px;
+  --s-9:  96px;
+  --s-10: 128px;
+  --s-11: 192px;
+
+  /* Section rhythm */
+  --section-y: clamp(80px, 9vw, 160px);
+  --gutter:    clamp(20px, 5vw, 56px);
+  --maxw:      1240px;
+  --maxw-prose:64ch;
+
+  /* ------------------------------------------------------------------
+     RADII — Mostly squared (civic), softened on cards
+     ------------------------------------------------------------------ */
+  --r-0:  0px;
+  --r-1:  2px;     /* hairline cards, ledger feel */
+  --r-2:  4px;     /* inputs, pills               */
+  --r-3:  8px;     /* buttons                     */
+  --r-4:  14px;    /* cards                       */
+  --r-5:  22px;    /* feature cards               */
+  --r-full: 999px; /* trust pills, badges         */
+
+  /* ------------------------------------------------------------------
+     SHADOWS — Cast against ink. Subtle, not foamy.
+     ------------------------------------------------------------------ */
+  --sh-1: 0 1px 0 rgba(7,18,29,0.08), 0 1px 2px rgba(7,18,29,0.06);
+  --sh-2: 0 6px 18px -8px rgba(7,18,29,0.25), 0 1px 0 rgba(7,18,29,0.06);
+  --sh-3: 0 20px 40px -16px rgba(7,18,29,0.35), 0 2px 0 rgba(7,18,29,0.08);
+  --sh-cream: 0 24px 60px -24px rgba(7,18,29,0.45);     /* light cards on ink */
+  --sh-glow:  0 0 0 1px rgba(217,164,65,0.45), 0 12px 36px -10px rgba(217,164,65,0.35);
+
+  /* Inner highlight (civic ledger top-edge) */
+  --inset-top: inset 0 1px 0 rgba(255,250,240,0.06);
+
+  /* ------------------------------------------------------------------
+     MOTION — Steady, train-like cadence
+     ------------------------------------------------------------------ */
+  --ease-civic:   cubic-bezier(.22,.61,.36,1);    /* default reveal      */
+  --ease-rail:    cubic-bezier(.65,.05,.36,1);    /* swap, mixer change  */
+  --ease-spring:  cubic-bezier(.34,1.56,.64,1);   /* magnetic button     */
+  --dur-1: 120ms;
+  --dur-2: 220ms;
+  --dur-3: 360ms;
+  --dur-4: 640ms;
+  --dur-5: 900ms;
+
+  /* Reveal-on-scroll standard offset */
+  --reveal-y: 24px;
+}
+
+/* ==========================================================================
+   SEMANTIC ELEMENTS — Apply tokens to plain HTML.
+   Import this stylesheet anywhere and basic HTML will look on-brand.
+   ========================================================================== */
+
+html { color-scheme: dark; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-sans);
+  font-size: var(--t-body);
+  line-height: var(--lh-body);
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Display + headings — DM Serif Display, civic-tight */
+.t-hero, h1.t-hero {
+  font-family: var(--font-display);
+  font-size: var(--t-hero);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--tr-tight);
+  font-weight: 400;
+  margin: 0;
+  text-wrap: balance;
+}
+h1, .t-display {
+  font-family: var(--font-display);
+  font-size: var(--t-display);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--tr-display);
+  font-weight: 400;
+  margin: 0 0 var(--s-5);
+  text-wrap: balance;
+}
+h2, .t-h1 {
+  font-family: var(--font-display);
+  font-size: var(--t-h1);
+  line-height: var(--lh-snug);
+  letter-spacing: var(--tr-display);
+  font-weight: 400;
+  margin: 0 0 var(--s-5);
+  text-wrap: balance;
+}
+h3, .t-h2 {
+  font-family: var(--font-display);
+  font-size: var(--t-h2);
+  line-height: var(--lh-snug);
+  font-weight: 400;
+  margin: 0 0 var(--s-4);
+}
+h4, .t-h3 {
+  font-family: var(--font-sans);
+  font-size: var(--t-h3);
+  line-height: var(--lh-snug);
+  font-weight: 600;
+  letter-spacing: -0.005em;
+  margin: 0 0 var(--s-3);
+}
+
+/* Eyebrow — the civic "stamp" above a headline */
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--t-micro);
+  text-transform: uppercase;
+  letter-spacing: var(--tr-eyebrow);
+  color: var(--accent);
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+}
+.eyebrow::before {
+  content: "";
+  width: 18px;
+  height: 1px;
+  background: currentColor;
+  display: inline-block;
+}
+
+/* Lead / body */
+.lead {
+  font-size: var(--t-lead);
+  line-height: var(--lh-loose);
+  color: var(--fg-muted);
+  max-width: var(--maxw-prose);
+  text-wrap: pretty;
+}
+p { margin: 0 0 var(--s-4); text-wrap: pretty; }
+p.muted { color: var(--fg-muted); }
+small { font-size: var(--t-small); color: var(--fg-muted); }
+
+/* Mono labels / receipts */
+.mono, code, kbd {
+  font-family: var(--font-mono);
+  font-size: var(--t-small);
+  letter-spacing: 0;
+}
+
+/* Links — gold underline, river-blue on hover */
+a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  transition: color var(--dur-2) var(--ease-civic);
+}
+a:hover { color: var(--accent-water); }
+
+/* Selection */
+::selection { background: var(--gold); color: var(--ink); }
+
+/* Rule */
+hr {
+  border: 0;
+  border-top: 1px solid var(--rule);
+  margin: var(--s-7) 0;
+}
+
+/* Buttons (semantic — UI kit has full variants) */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  padding: 14px 22px;
+  font-family: var(--font-sans);
+  font-size: var(--t-body);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  border-radius: var(--r-3);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: transform var(--dur-2) var(--ease-spring),
+              background var(--dur-2) var(--ease-civic),
+              color var(--dur-2) var(--ease-civic),
+              border-color var(--dur-2) var(--ease-civic);
+  text-decoration: none;
+}
+.btn:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }
+
+/* Reduce motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
