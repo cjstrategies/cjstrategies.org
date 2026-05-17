@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Casey Jones Strategies · Development Without Displacement</title>
+<meta name="description" content="Casey Jones Strategies — a 501(c)(3) nonprofit supporting communities facing displacement pressure through education, organizing support, and resident-led progress." />
+
+<link rel="stylesheet" href="../../colors_and_type.css" />
+
+<style>
+  /* Page chrome — smooth scroll, sticky nav offset, scroll behavior */
+  html { scroll-behavior: smooth; }
+  body  { background: var(--ink); min-height: 100vh; }
+  section[id] { scroll-margin-top: 80px; }
+
+  /* Smaller responsive type scale adjustments */
+  @media (max-width: 600px) {
+    :root { --section-y: clamp(64px, 14vw, 110px); }
+  }
+
+  /* Disable native :focus-visible outline on click; preserve for keyboard */
+  *:focus { outline: none; }
+  *:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; border-radius: 2px; }
+
+  /* Root mount fades in once React is ready (avoids FOUC) */
+  #root { opacity: 0; transition: opacity 360ms var(--ease-civic); }
+  #root.ready { opacity: 1; }
+</style>
+</head>
+
+<body>
+  <div id="root"></div>
+
+  <!-- React + Babel -->
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+  <!-- System primitives -->
+  <script type="text/babel" src="Icon.jsx"></script>
+  <script type="text/babel" src="motion.jsx"></script>
+  <script type="text/babel" src="primitives.jsx"></script>
+
+  <!-- Sections -->
+  <script type="text/babel" src="Nav.jsx"></script>
+  <script type="text/babel" src="Hero.jsx"></script>
+  <script type="text/babel" src="Story.jsx"></script>
+  <script type="text/babel" src="Strategy.jsx"></script>
+  <script type="text/babel" src="Programs.jsx"></script>
+  <script type="text/babel" src="Volunteer.jsx"></script>
+  <script type="text/babel" src="Collective.jsx"></script>
+  <script type="text/babel" src="Investment.jsx"></script>
+  <script type="text/babel" src="Trust.jsx"></script>
+  <script type="text/babel" src="Contact.jsx"></script>
+  <script type="text/babel" src="Footer.jsx"></script>
+
+  <!-- App -->
+  <script type="text/babel">
+    function App() {
+      React.useEffect(() => {
+        const root = document.getElementById("root");
+        if (root) root.classList.add("ready");
+      }, []);
+      return (
+        <>
+          <ScrollProgress />
+          <CursorLight />
+          <Nav />
+          <main>
+            <Hero />
+            <Story />
+            <Strategy />
+            <Programs />
+            <Volunteer />
+            <Collective />
+            <Investment />
+            <Trust />
+            <Contact />
+          </main>
+          <Footer />
+        </>
+      );
+    }
+
+    const rootEl = document.getElementById("root");
+    ReactDOM.createRoot(rootEl).render(<App />);
+  </script>
+</body>
+</html>

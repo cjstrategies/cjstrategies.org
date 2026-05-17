@@ -1,0 +1,23 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="_card.css"></head>
+<body style="height:230px">
+  <div class="lbl" style="margin-bottom:14px">FORM FIELDS · 4PX RADIUS · MONO LABEL</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+    <div style="display:flex;flex-direction:column;gap:8px">
+      <span style="font-family:var(--font-mono);font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--fg-muted)">Name *</span>
+      <input value="Jordan Rivers" style="padding:12px 14px;font-family:var(--font-sans);font-size:15px;background:rgba(7,18,29,0.4);color:var(--fg);border:1.5px solid var(--rule-strong);border-radius:4px;outline:0">
+    </div>
+    <div style="display:flex;flex-direction:column;gap:8px">
+      <span style="font-family:var(--font-mono);font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--fg-muted)">Email *</span>
+      <input value="jordan@example.com" style="padding:12px 14px;font-family:var(--font-sans);font-size:15px;background:rgba(7,18,29,0.4);color:var(--fg);border:1.5px solid #d9a441;border-radius:4px;outline:0">
+    </div>
+    <div style="display:flex;flex-direction:column;gap:8px;grid-column:1 / -1">
+      <span style="font-family:var(--font-mono);font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--fg-muted)">Volunteer interest</span>
+      <div style="position:relative">
+        <select style="width:100%;padding:12px 14px;padding-right:40px;font-family:var(--font-sans);font-size:15px;background:rgba(7,18,29,0.4);color:var(--fg);border:1.5px solid var(--rule-strong);border-radius:4px;outline:0;appearance:none">
+          <option>Community outreach</option>
+        </select>
+        <svg width="12" height="8" viewBox="0 0 12 8" style="position:absolute;right:14px;top:50%;transform:translateY(-50%);pointer-events:none"><path d="M1 1.5 6 6.5 11 1.5" fill="none" stroke="#d9a441" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </div>
+    </div>
+  </div>
+</body></html>
