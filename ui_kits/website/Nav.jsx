@@ -49,7 +49,7 @@ function Nav() {
               boxShadow: "inset 0 0 0 1px rgba(7,18,29,0.18), 0 4px 12px -4px rgba(0,0,0,0.4)",
             }}
           >
-            <img src="../../assets/logo-color.png" alt="" width="38" height="38" style={{ objectFit: "contain" }} />
+            <img src="./assets/logo-color.png" alt="" width="38" height="38" style={{ objectFit: "contain" }} />
           </span>
           <span style={{ display: "flex", flexDirection: "column", lineHeight: 1.05 }}>
             <span style={{ fontFamily: "var(--font-display)", fontSize: 17, letterSpacing: 0 }}>Casey Jones</span>

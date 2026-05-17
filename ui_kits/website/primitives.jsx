@@ -235,7 +235,7 @@ function Select({ onLight, children, ...props }) {
    `variant`: "color" uses the dark-on-cream seal; "mono" uses the cream-on-dark seal.
 */
 function BadgeLogo({ size = 44, variant = "mono", style = {} }) {
-  const src = variant === "color" ? "../../assets/logo-color.png" : "../../assets/logo-mono.png";
+  const src = variant === "color" ? "./assets/logo-color.png" : "./assets/logo-mono.png";
   return (
     <img
       src={src}

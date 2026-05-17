@@ -152,7 +152,7 @@ function Hero() {
             }}>
               <Smoke />
               <img
-                src="../../assets/logo-color.png"
+                src="./assets/logo-color.png"
                 alt="Casey Jones Strategies"
                 style={{
                   position: "absolute", inset: "5%",

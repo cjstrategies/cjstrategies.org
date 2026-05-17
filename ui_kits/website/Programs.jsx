@@ -57,7 +57,7 @@ function Programs() {
               display: "grid", placeItems: "center",
               boxShadow: "inset 0 0 0 1px rgba(7,18,29,0.08)",
             }}>
-              <img src="../../assets/logo-color.png" alt="" style={{ width: "82%", height: "82%", objectFit: "contain" }} />
+              <img src="./assets/logo-color.png" alt="" style={{ width: "82%", height: "82%", objectFit: "contain" }} />
             </div>
             <div style={{ position: "relative" }}>
               <h3 className="t-display" style={{ fontStyle: "italic", marginBottom: 0 }}>

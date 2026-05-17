@@ -99,7 +99,7 @@ function Collective() {
               boxShadow: "0 12px 32px -10px rgba(0,0,0,0.5), inset 0 0 0 1px rgba(7,18,29,0.1)",
               zIndex: 2,
             }}>
-              <img src="../../assets/logo-color.png" alt="" style={{ width: "82%", height: "82%", objectFit: "contain" }} />
+              <img src="./assets/logo-color.png" alt="" style={{ width: "82%", height: "82%", objectFit: "contain" }} />
             </div>
 
             {/* Nodes */}

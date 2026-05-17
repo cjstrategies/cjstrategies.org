@@ -25,7 +25,7 @@ function Footer() {
                 background: "var(--paper-cream)",
                 display: "grid", placeItems: "center",
               }}>
-                <img src="../../assets/logo-color.png" alt="" width="50" height="50" style={{ objectFit: "contain" }} />
+                <img src="./assets/logo-color.png" alt="" width="50" height="50" style={{ objectFit: "contain" }} />
               </span>
               <div style={{ lineHeight: 1.1 }}>
                 <div style={{ fontFamily: "var(--font-display)", fontSize: 22 }}>Casey Jones Strategies</div>
