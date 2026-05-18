@@ -1,17 +1,15 @@
-# Claude Code local settings
-.claude/
+# .DS_Store
+node_modules/
 
-# OS
-.DS_Store
-Thumbs.db
+# Local scratch / bundler intermediates
+export/src/
+_check/
+_logo_preview*
 
 # Editor
+.vscode/
+.idea/
 *.swp
-*.swo
-.vscode/settings.json
 
-# Node (if added later)
-node_modules/
-dist/
-.env
-.env.local
+# OS
+Thumbs.db

@@ -19,20 +19,329 @@
     :root { --section-y: clamp(64px, 14vw, 110px); }
   }
 
-  /* Disable native :focus-visible outline on click; preserve for keyboard */
+  /* Disable native :focus outline on click; preserve for keyboard */
   *:focus { outline: none; }
   *:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; border-radius: 2px; }
 
   /* Root mount fades in once React is ready (avoids FOUC) */
-  #root { opacity: 0; transition: opacity 360ms var(--ease-civic); }
+  #root { opacity: 0; transition: opacity 480ms var(--ease-civic); }
   #root.ready { opacity: 1; }
+
+  /* ---------- Splash loader ----------
+     Cream cartoon locomotive pulling three boxcars across a navy rail,
+     dragging a gold progress fill behind it. Pure CSS/SVG so it appears
+     before any JS runs. Fades out when React mounts.
+  */
+  #cjs-splash {
+    position: fixed; inset: 0; z-index: 9999;
+    background: var(--ink, #07121d);
+    display: grid; place-items: center;
+    transition: opacity 600ms cubic-bezier(.22,.61,.36,1), visibility 600ms;
+    overflow: hidden;
+  }
+  /* Faint starfield bg */
+  #cjs-splash::before {
+    content: "";
+    position: absolute; inset: 0;
+    background-image:
+      radial-gradient(rgba(245,236,217,0.5) 1px, transparent 1.4px),
+      radial-gradient(rgba(245,236,217,0.32) 1px, transparent 1.4px);
+    background-size: 220px 180px, 320px 240px;
+    background-position: 20px 30px, 130px 100px;
+    opacity: 0.5;
+    pointer-events: none;
+  }
+  body.cjs-ready #cjs-splash { opacity: 0; visibility: hidden; pointer-events: none; }
+
+  .cjs-splash-stack {
+    position: relative;
+    display: flex; flex-direction: column; align-items: center; gap: 28px;
+    padding: 0 24px;
+    width: min(440px, 92vw);
+  }
+
+  /* --- Seal --- */
+  .cjs-splash-seal {
+    position: relative;
+    width: 124px; height: 124px;
+    border-radius: 50%;
+    background: #fffaf0;
+    display: grid; place-items: center;
+    box-shadow: 0 24px 60px -20px rgba(0,0,0,0.6), inset 0 0 0 1px rgba(7,18,29,0.08);
+    animation: cjs-splash-pulse 2.8s cubic-bezier(.22,.61,.36,1) infinite;
+  }
+  .cjs-splash-seal::before {
+    content: ""; position: absolute; inset: -10px;
+    border-radius: 50%; border: 1px solid rgba(255,250,240,0.22);
+  }
+  .cjs-splash-seal::after {
+    content: ""; position: absolute; inset: -26px;
+    border-radius: 50%; border: 1px dashed rgba(255,250,240,0.12);
+  }
+  .cjs-splash-seal img { width: 96%; height: 96%; object-fit: contain; }
+
+  /* --- Eyebrow + title --- */
+  .cjs-splash-eyebrow {
+    font-family: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+    font-size: 11px; letter-spacing: 0.28em; text-transform: uppercase;
+    color: #d9a441; font-weight: 500;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .cjs-splash-eyebrow::before,
+  .cjs-splash-eyebrow::after {
+    content: ""; width: 18px; height: 1px; background: currentColor; opacity: 0.6;
+  }
+  .cjs-splash-title {
+    font-family: "DM Serif Display", Georgia, serif;
+    font-size: 22px; color: #fffaf0;
+    margin: -8px 0 0; letter-spacing: -0.01em;
+  }
+  .cjs-splash-title em { font-style: italic; color: #d9a441; }
+
+  /* --- Train + rail progress --- */
+  .cjs-splash-progress {
+    position: relative;
+    width: 100%;
+    height: 56px;
+    margin-top: 4px;
+  }
+  .cjs-rail-bed {
+    position: absolute; left: 0; right: 0; bottom: 6px;
+    height: 14px;
+    border-radius: 2px;
+    overflow: visible;
+  }
+  /* Rail ties (dashes under the rail) */
+  .cjs-rail-ties {
+    position: absolute; left: 0; right: 0; bottom: 0;
+    height: 6px;
+    background-image: repeating-linear-gradient(
+      90deg,
+      rgba(255,250,240,0.18) 0 8px,
+      transparent 8px 18px);
+  }
+  /* Rail line (top of rail) */
+  .cjs-rail-line {
+    position: absolute; left: 0; right: 0; top: 6px;
+    height: 2px; border-radius: 2px;
+    background: rgba(255,250,240,0.12);
+  }
+  /* Filled portion of rail */
+  .cjs-rail-fill {
+    position: absolute; left: 0; top: 6px;
+    height: 2px; width: 0%; border-radius: 2px;
+    background: linear-gradient(90deg, #d9a441, #f5ecd9);
+    box-shadow: 0 0 12px rgba(217,164,65,0.6);
+    animation: cjs-rail-fill 3.6s cubic-bezier(.4,0,.2,1) infinite;
+  }
+  /* Train track-runner — translates left to right, carries the train SVG */
+  .cjs-train-runner {
+    position: absolute; bottom: 4px; left: 0;
+    width: 0; height: 0;
+    animation: cjs-train-run 3.6s cubic-bezier(.4,0,.2,1) infinite;
+  }
+  .cjs-splash-train {
+    position: absolute; right: 0; bottom: -2px;
+    width: 200px; height: 44px;
+    transform-origin: right bottom;
+  }
+  /* Wheel rotation (using SVG `class="spoke"` elements) */
+  .cjs-splash-train .spoke {
+    transform-origin: center;
+    animation: cjs-wheel 0.42s linear infinite;
+  }
+  /* Smoke puffs */
+  .cjs-splash-train .puff {
+    animation: cjs-splash-puff 1.6s ease-out infinite;
+    transform-origin: 178px 4px;
+  }
+  .cjs-splash-train .puff.p2 { animation-delay: 0.5s; }
+  .cjs-splash-train .puff.p3 { animation-delay: 1.0s; }
+
+  /* Caption */
+  .cjs-splash-caption {
+    font-family: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+    font-size: 10.5px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: rgba(255,250,240,0.5);
+    display: flex; align-items: center; gap: 10px;
+  }
+  .cjs-splash-caption span.dot {
+    width: 5px; height: 5px; border-radius: 50%;
+    background: #d9a441;
+    animation: cjs-splash-blink 1.4s ease-in-out infinite;
+  }
+
+  /* --- Keyframes --- */
+  @keyframes cjs-splash-pulse {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-5px); }
+  }
+  @keyframes cjs-rail-fill {
+    0%   { width: 0%;   opacity: 1; }
+    85%  { width: 100%; opacity: 1; }
+    100% { width: 100%; opacity: 0; }
+  }
+  @keyframes cjs-train-run {
+    0%   { transform: translateX(0%); }
+    85%  { transform: translateX(100%); }
+    100% { transform: translateX(100%); opacity: 0; }
+  }
+  @keyframes cjs-wheel {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+  }
+  @keyframes cjs-splash-puff {
+    0%   { transform: translate(0, 0)        scale(0.5); opacity: 0; }
+    18%  { opacity: 0.85; }
+    100% { transform: translate(-10px, -22px) scale(1.8); opacity: 0; }
+  }
+  @keyframes cjs-splash-blink {
+    0%, 100% { opacity: 0.3; }
+    50%      { opacity: 1;   }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .cjs-splash-seal, .cjs-rail-fill, .cjs-train-runner,
+    .cjs-splash-train .spoke, .cjs-splash-train .puff,
+    .cjs-splash-caption span.dot {
+      animation: none !important;
+    }
+    .cjs-rail-fill { width: 60%; }
+    .cjs-train-runner { transform: translateX(60%); }
+  }
 </style>
 </head>
 
 <body>
+  <!-- Splash loader — cream locomotive pulling cars across a gold rail. -->
+  <div id="cjs-splash" aria-hidden="true" role="status">
+    <div class="cjs-splash-stack">
+      <div class="cjs-splash-seal">
+        <img src="./assets/logo-color.png" alt="" />
+      </div>
+
+      <div class="cjs-splash-eyebrow">Casey Jones Strategies</div>
+      <div class="cjs-splash-title">Development <em>without</em> displacement.</div>
+
+      <div class="cjs-splash-progress">
+        <div class="cjs-rail-bed">
+          <div class="cjs-rail-ties"></div>
+          <div class="cjs-rail-line"></div>
+          <div class="cjs-rail-fill"></div>
+        </div>
+        <div class="cjs-train-runner">
+          <svg class="cjs-splash-train" viewBox="0 0 220 44" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <!-- Smoke puffs (drawn first, behind train) -->
+            <g fill="#fffaf0">
+              <circle class="puff"    cx="178" cy="4" r="3"   opacity="0"/>
+              <circle class="puff p2" cx="178" cy="4" r="3.6" opacity="0"/>
+              <circle class="puff p3" cx="178" cy="4" r="2.6" opacity="0"/>
+            </g>
+
+            <!-- Boxcar 3 (leftmost) -->
+            <g>
+              <rect x="6"  y="18" width="42" height="16" rx="1.5" fill="#fffaf0" stroke="#07121d" stroke-width="1"/>
+              <rect x="6"  y="15" width="42" height="4"  fill="#fffaf0" stroke="#07121d" stroke-width="1"/>
+              <rect x="12" y="22" width="12" height="8"  fill="#07121d" opacity="0.85"/>
+              <rect x="30" y="22" width="12" height="8"  fill="#07121d" opacity="0.85"/>
+              <circle cx="14" cy="37" r="3.5" fill="#07121d"/>
+              <circle cx="40" cy="37" r="3.5" fill="#07121d"/>
+              <circle cx="14" cy="37" r="1.4" fill="#d9a441"/>
+              <circle cx="40" cy="37" r="1.4" fill="#d9a441"/>
+            </g>
+            <line x1="48" y1="30" x2="56" y2="30" stroke="#fffaf0" stroke-width="1.6"/>
+
+            <!-- Boxcar 2 -->
+            <g>
+              <rect x="56" y="18" width="42" height="16" rx="1.5" fill="#fffaf0" stroke="#07121d" stroke-width="1"/>
+              <rect x="56" y="15" width="42" height="4"  fill="#fffaf0" stroke="#07121d" stroke-width="1"/>
+              <rect x="62" y="22" width="12" height="8"  fill="#07121d" opacity="0.85"/>
+              <rect x="80" y="22" width="12" height="8"  fill="#07121d" opacity="0.85"/>
+              <circle cx="64" cy="37" r="3.5" fill="#07121d"/>
+              <circle cx="90" cy="37" r="3.5" fill="#07121d"/>
+              <circle cx="64" cy="37" r="1.4" fill="#d9a441"/>
+              <circle cx="90" cy="37" r="1.4" fill="#d9a441"/>
+            </g>
+            <line x1="98" y1="30" x2="106" y2="30" stroke="#fffaf0" stroke-width="1.6"/>
+
+            <!-- Boxcar 1 -->
+            <g>
+              <rect x="106" y="18" width="42" height="16" rx="1.5" fill="#fffaf0" stroke="#07121d" stroke-width="1"/>
+              <rect x="106" y="15" width="42" height="4"  fill="#fffaf0" stroke="#07121d" stroke-width="1"/>
+              <rect x="112" y="22" width="12" height="8"  fill="#07121d" opacity="0.85"/>
+              <rect x="130" y="22" width="12" height="8"  fill="#07121d" opacity="0.85"/>
+              <circle cx="114" cy="37" r="3.5" fill="#07121d"/>
+              <circle cx="140" cy="37" r="3.5" fill="#07121d"/>
+              <circle cx="114" cy="37" r="1.4" fill="#d9a441"/>
+              <circle cx="140" cy="37" r="1.4" fill="#d9a441"/>
+            </g>
+            <line x1="148" y1="30" x2="153" y2="30" stroke="#fffaf0" stroke-width="1.6"/>
+
+            <!-- Locomotive (rightmost) -->
+            <g>
+              <!-- Cab roof overhang -->
+              <rect x="151" y="10" width="20" height="3" fill="#fffaf0" stroke="#07121d" stroke-width="1"/>
+              <!-- Cab body -->
+              <rect x="153" y="13" width="16" height="22" fill="#fffaf0" stroke="#07121d" stroke-width="1"/>
+              <!-- Cab window -->
+              <rect x="156" y="16" width="10" height="7" fill="#07121d"/>
+              <line x1="161" y1="16" x2="161" y2="23" stroke="#fffaf0" stroke-width="0.6"/>
+              <!-- Boiler -->
+              <rect x="169" y="18" width="30" height="17" rx="1" fill="#fffaf0" stroke="#07121d" stroke-width="1"/>
+              <!-- Boiler bands -->
+              <line x1="178" y1="18" x2="178" y2="35" stroke="#07121d" stroke-width="0.6"/>
+              <line x1="188" y1="18" x2="188" y2="35" stroke="#07121d" stroke-width="0.6"/>
+              <!-- Smokestack -->
+              <rect x="175" y="6" width="6" height="12" fill="#fffaf0" stroke="#07121d" stroke-width="1"/>
+              <ellipse cx="178" cy="6" rx="5" ry="1.6" fill="#07121d"/>
+              <!-- Steam dome -->
+              <rect x="183" y="14" width="4" height="4" fill="#fffaf0" stroke="#07121d" stroke-width="0.8"/>
+              <ellipse cx="185" cy="14" rx="3.2" ry="1" fill="#fffaf0" stroke="#07121d" stroke-width="0.8"/>
+              <!-- Smokebox door -->
+              <circle cx="199" cy="26" r="5" fill="#07121d"/>
+              <circle cx="199" cy="26" r="2.5" fill="#d9a441"/>
+              <!-- Headlamp -->
+              <rect x="195" y="19" width="5" height="5" fill="#fffaf0" stroke="#07121d" stroke-width="0.6"/>
+              <circle cx="197.5" cy="21.5" r="1.4" fill="#d9a441"/>
+              <!-- Cowcatcher -->
+              <polygon points="204,36 212,36 207,30 200,28" fill="#07121d"/>
+              <line x1="205" y1="30" x2="205" y2="35" stroke="#d9a441" stroke-width="0.5"/>
+              <line x1="208" y1="30" x2="208" y2="35" stroke="#d9a441" stroke-width="0.5"/>
+              <!-- Wheels (with spokes) -->
+              <g class="spoke" style="transform-origin: 165px 37px">
+                <circle cx="165" cy="37" r="3.5" fill="#07121d"/>
+                <line x1="165" y1="33.5" x2="165" y2="40.5" stroke="#d9a441" stroke-width="0.7"/>
+                <line x1="161.5" y1="37" x2="168.5" y2="37" stroke="#d9a441" stroke-width="0.7"/>
+              </g>
+              <g class="spoke" style="transform-origin: 184px 38px">
+                <circle cx="184" cy="38" r="5.2" fill="#07121d" stroke="#d9a441" stroke-width="0.8"/>
+                <line x1="184" y1="33"   x2="184" y2="43"   stroke="#d9a441" stroke-width="0.7"/>
+                <line x1="179" y1="38"   x2="189" y2="38"   stroke="#d9a441" stroke-width="0.7"/>
+                <line x1="180.5" y1="34.5" x2="187.5" y2="41.5" stroke="#d9a441" stroke-width="0.6"/>
+                <line x1="187.5" y1="34.5" x2="180.5" y2="41.5" stroke="#d9a441" stroke-width="0.6"/>
+              </g>
+              <g class="spoke" style="transform-origin: 199px 37px">
+                <circle cx="199" cy="37" r="3.5" fill="#07121d"/>
+                <line x1="199" y1="33.5" x2="199" y2="40.5" stroke="#d9a441" stroke-width="0.7"/>
+                <line x1="195.5" y1="37" x2="202.5" y2="37" stroke="#d9a441" stroke-width="0.7"/>
+              </g>
+              <!-- Side rod (cream bar connecting wheels) -->
+              <rect x="163" y="36.5" width="38" height="1.5" fill="#d9a441" opacity="0.85"/>
+            </g>
+          </svg>
+        </div>
+      </div>
+
+      <div class="cjs-splash-caption">
+        <span class="dot"></span>
+        <span>Boarding the manifest…</span>
+      </div>
+    </div>
+  </div>
+
   <div id="root"></div>
 
   <!-- React + Babel -->
+  <script>window.__cjsStart = performance.now();</script>
   <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
   <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
   <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
@@ -61,6 +370,12 @@
       React.useEffect(() => {
         const root = document.getElementById("root");
         if (root) root.classList.add("ready");
+        // Reveal page + start splash fade. Brief min-display so the splash doesn't
+        // flicker on fast loads.
+        const showFor = 1800;
+        const t0 = window.__cjsStart || performance.now();
+        const remaining = Math.max(0, showFor - (performance.now() - t0));
+        setTimeout(() => document.body.classList.add("cjs-ready"), remaining);
       }, []);
       return (
         <>

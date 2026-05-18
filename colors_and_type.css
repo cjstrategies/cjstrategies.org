@@ -5,11 +5,57 @@
    ========================================================================== */
 
 /* ---------- Webfonts ----------
+   Brand font files (TTF, weight 400 normal + italic each).
+   Only one weight per family is provided, so we declare those and turn on
+   font-synthesis below — heavier weights (500/600/700) are auto-synthesized.
+   Replace with proper multi-weight files if/when CJS ships them.
+
    Display:  DM Serif Display  — editorial gravitas, civic confidence
    Body:     Public Sans       — USWDS civic system font, trustworthy
    Mono:     IBM Plex Mono     — eyebrows, trust pills, labels, ticker
 */
-@import url("https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Public+Sans:ital,wght@0,300..900;1,300..900&family=IBM+Plex+Mono:wght@300;400;500;600&display=swap");
+@font-face {
+  font-family: "DM Serif Display";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("fonts/dm-serif-display_5.2.8_latin-400-normal.ttf") format("truetype");
+}
+@font-face {
+  font-family: "DM Serif Display";
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url("fonts/dm-serif-display_5.2.8_latin-400-italic.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Public Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("fonts/public-sans_5.2.7_latin-400-normal.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Public Sans";
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url("fonts/public-sans_5.2.7_latin-400-italic.ttf") format("truetype");
+}
+@font-face {
+  font-family: "IBM Plex Mono";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("fonts/ibm-plex-mono_5.2.7_latin-400-normal.ttf") format("truetype");
+}
+@font-face {
+  font-family: "IBM Plex Mono";
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url("fonts/ibm-plex-mono_5.2.7_latin-400-italic.ttf") format("truetype");
+}
 
 :root {
   /* ------------------------------------------------------------------
@@ -177,6 +223,9 @@ body {
   font-size: var(--t-body);
   line-height: var(--lh-body);
   font-weight: 400;
+  /* Only 400 weight files were provided — let the browser synthesize 500/600/700
+     and italic where called. Remove this once true weight files ship. */
+  font-synthesis: weight style;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }

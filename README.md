@@ -121,9 +121,9 @@ The full palette is in `colors_and_type.css`. Conceptual roles:
 ### Type system
 
 - **Display:** DM Serif Display — italics allowed sparingly for emphasis in pull-quotes only.
-- **Body:** Public Sans 400 / 500 / 600 / 700. The civic system font. Width-comfortable, slightly humanist.
-- **Mono / labels:** IBM Plex Mono 400 / 500 for eyebrows, trust pills, EIN/legal markers, numeric values.
-- **Substitution flag:** No bespoke font files were provided. DM Serif Display + Public Sans + IBM Plex Mono are loaded from Google Fonts. **If CJS adopts custom fonts later, swap the `@import` in `colors_and_type.css` and the rest of the system inherits.**
+- **Body:** Public Sans 400. The civic system font. Width-comfortable, slightly humanist.
+- **Mono / labels:** IBM Plex Mono 400 for eyebrows, trust pills, EIN/legal markers, numeric values.
+- **Files:** all three families ship with the system as TTFs in `fonts/`, loaded via `@font-face` in `colors_and_type.css`. Currently only weight 400 (normal + italic) is provided per family — heavier weights (500/600/700) used in headlines and buttons are **browser-synthesized** via `font-synthesis: weight style`. This works well across modern browsers but is slightly less crisp than true cut weights. If CJS later ships proper 500/600/700 files, drop them into `fonts/` and add matching `@font-face` blocks.
 
 ### Spacing & rhythm
 - 4pt baseline grid. Section vertical rhythm is `clamp(80px, 9vw, 160px)` — generous, civic.
@@ -241,7 +241,7 @@ Casey Jones Strategies uses a **minimal, civic icon vocabulary** — stroke-base
 
 ## Open caveats & asks (for the brand owner)
 
-1. **Font files:** the system loads DM Serif Display + Public Sans + IBM Plex Mono from Google Fonts. If CJS has bespoke fonts (e.g. a custom slab or grotesk), please send TTFs/WOFFs and we'll swap them in.
+1. **Font files installed.** DM Serif Display, Public Sans, and IBM Plex Mono ship in `fonts/` at weight 400 only. Heavier weights are browser-synthesized. If you have access to true 500/600/700 cuts (especially for Public Sans which gets the most heavy-weight usage in buttons and headings), drop them in and we'll wire them up.
 2. **Photography:** no photos were provided. Real resident photography (in B&W, full-bleed) would dramatically lift the Story and Volunteer sections. Please send a starter set of 8–12 images.
 3. **Codebase mount:** the attached `cjstrategies.org` folder mounted empty; the referenced GitHub repo also contains only a placeholder README. All copy and structure here is taken verbatim from the written brief. If a real codebase exists later, re-import and we can align this system to it.
 4. **Compliance review:** the Future Investment Group + Donation sections include placeholder disclaimer copy that should be reviewed by counsel before any live launch.

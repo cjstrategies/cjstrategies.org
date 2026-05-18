@@ -126,7 +126,7 @@ function Hero() {
 
         {/* Seal column */}
         <Reveal delay={120} y={32}>
-          <div style={{ position: "relative", aspectRatio: "1 / 1", maxWidth: 520, marginLeft: "auto" }}>
+          <div style={{ position: "relative", aspectRatio: "1 / 1", maxWidth: 440, margin: "0 auto" }}>
             {/* Concentric stamp rings (decorative) */}
             <div aria-hidden="true" style={{
               position: "absolute", inset: -8, borderRadius: "50%",
@@ -149,15 +149,17 @@ function Hero() {
               boxShadow: "0 30px 80px -20px rgba(0,0,0,0.55), inset 0 0 0 1px rgba(7,18,29,0.08)",
               overflow: "hidden",
               animation: "cjs-bob 3.2s ease-in-out infinite",
+              display: "grid", placeItems: "center",
             }}>
               <Smoke />
               <img
                 src="./assets/logo-color.png"
                 alt="Casey Jones Strategies"
                 style={{
-                  position: "absolute", inset: "5%",
-                  width: "90%", height: "90%",
-                  objectFit: "contain", zIndex: 2,
+                  width: "98%", height: "98%",
+                  objectFit: "contain",
+                  objectPosition: "center",
+                  position: "relative", zIndex: 2,
                 }}
               />
               {/* Subtle vignette */}
