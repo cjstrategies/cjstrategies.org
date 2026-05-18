@@ -1,17 +1,10 @@
-/* Future Investment Group — placeholder section with strong disclaimers. */
+/* Purpose-Driven Partnerships — community stakeholder pathway section. */
 
-const IG_CARDS = [
-  { title: "Interest List",  icon: "users-round", copy: "Collect names, emails, organization info, and areas of interest from future partners." },
-  { title: "Partner Fit",    icon: "compass",     copy: "Identify mission alignment, geography, community benefit goals, and values compatibility." },
-  { title: "Public Updates", icon: "megaphone",   copy: "Share non-offering updates about planning meetings, community priorities, and progress." },
-  { title: "Compliance First", icon: "scale",     copy: "Keep legal, tax, investment, securities, and charitable solicitation review front and center." },
-];
-
-const IG_NOTICE = [
-  "This page is informational only.",
-  "Nothing here is an offer to sell securities or a solicitation to invest.",
-  "No returns, profits, outcomes, or investment opportunities are promised.",
-  "Future investment-related activity should be reviewed by qualified legal and financial professionals.",
+const PDP_CARDS = [
+  { title: "Express Interest",  icon: "users-round", copy: "Share your name, organization, focus areas, and the communities or causes you care most about." },
+  { title: "Explore Alignment", icon: "compass",     copy: "We'll explore shared values, mission fit, geographic focus, and mutual community-benefit goals together." },
+  { title: "Community First",   icon: "hand-heart",  copy: "Every conversation starts with what the community needs — residents, culture, and stability come before any partnership." },
+  { title: "Build Together",    icon: "route",       copy: "Long-term initiatives are shaped collaboratively through planning, listening, and shared accountability." },
 ];
 
 function Investment() {
@@ -29,19 +22,20 @@ function Investment() {
             <Pill tone="mono">Section 06</Pill>
           </div>
           <h2 className="t-display" style={{ marginTop: 12 }}>
-            Future Community<br/>Investment Group.
+            Purpose-Driven<br/>Partnerships.
           </h2>
         </Reveal>
         <Reveal delay={120}>
           <p className="lead">
-            An incoming partner pathway for mission-aligned supporters, business leaders,
-            funders, builders, and community stakeholders interested in future
-            community-benefit investment conversations.
+            A collaborative pathway for mission-aligned supporters, business leaders,
+            funders, builders, and community stakeholders interested in exploring future
+            community-benefit partnerships, shared-impact initiatives, and long-term
+            neighborhood growth opportunities.
           </p>
         </Reveal>
       </div>
 
-      {/* Secondary headline + responsibility band */}
+      {/* Secondary headline + values band */}
       <Reveal>
         <div className="cjs-ig-band" style={{
           display: "grid", gridTemplateColumns: "0.9fr 1.1fr", gap: 40,
@@ -60,15 +54,16 @@ function Investment() {
           }} />
 
           <div>
-            <Eyebrow>Boundaries</Eyebrow>
+            <Eyebrow>Our Commitment</Eyebrow>
             <h3 className="t-h1" style={{ marginTop: 16, fontStyle: "italic" }}>
-              Responsible progress starts with clear boundaries.
+              Community benefit is the foundation of every partnership.
             </h3>
           </div>
           <p style={{ color: "var(--fg-muted)", margin: 0, lineHeight: 1.7 }}>
-            This page is a placeholder for future public information, partner onboarding,
-            meeting announcements, and interest collection. It should be reviewed by
-            counsel before accepting funds or publishing formal investment opportunities.
+            This page is a gathering space for future public information, partner
+            conversations, and community announcements. We are building slowly and
+            intentionally — centering residents, culture, and neighborhood stability
+            at every step.
           </p>
         </div>
       </Reveal>
@@ -78,7 +73,7 @@ function Investment() {
         display: "grid", gridTemplateColumns: "repeat(4, minmax(0, 1fr))", gap: 16,
         marginBottom: 56,
       }}>
-        {IG_CARDS.map((c, i) => (
+        {PDP_CARDS.map((c, i) => (
           <Reveal key={c.title} delay={i * 90}>
             <div style={{
               padding: 28, height: "100%",
@@ -97,7 +92,7 @@ function Investment() {
               <div style={{
                 fontFamily: "var(--font-mono)", fontSize: 10, letterSpacing: "0.18em",
                 textTransform: "uppercase", color: "var(--fg-dim)",
-              }}>Partner Path · 0{i + 1}</div>
+              }}>Partnership Path · 0{i + 1}</div>
               <h4 className="t-h3" style={{ marginBottom: 0 }}>{c.title}</h4>
               <p style={{ color: "var(--fg-muted)", margin: 0, fontSize: "0.9375rem", lineHeight: 1.6 }}>{c.copy}</p>
             </div>
@@ -105,35 +100,38 @@ function Investment() {
         ))}
       </div>
 
-      {/* Important notice + CTA */}
+      {/* How it works + CTA */}
       <Reveal>
         <div className="cjs-ig-notice" style={{
           display: "grid", gridTemplateColumns: "1.2fr 0.8fr", gap: 24,
           padding: 32,
-          background: "rgba(184,100,63,0.06)",
-          border: "1px solid rgba(184,100,63,0.35)",
+          background: "rgba(143,174,144,0.06)",
+          border: "1px solid rgba(143,174,144,0.35)",
           borderRadius: "var(--r-4)",
         }}>
           <div>
             <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 16 }}>
-              <Icon name="shield-check" size={20} style={{ color: "var(--rust)" }} />
+              <Icon name="heart-handshake" size={20} style={{ color: "var(--sage)" }} />
               <span style={{
                 fontFamily: "var(--font-mono)", fontSize: 11, letterSpacing: "0.18em",
-                textTransform: "uppercase", color: "var(--rust)", fontWeight: 600,
-              }}>Important notice</span>
+                textTransform: "uppercase", color: "var(--sage)", fontWeight: 600,
+              }}>How this works</span>
             </div>
             <ul style={{ margin: 0, paddingLeft: 18, color: "var(--fg-muted)", lineHeight: 1.7 }}>
-              {IG_NOTICE.map((n) => <li key={n}>{n}</li>)}
+              <li>This page is for informational and community-engagement purposes only.</li>
+              <li>No formal commitments, funding agreements, or obligations are created by expressing interest.</li>
+              <li>All future partnership activity will be publicly communicated and mission-aligned.</li>
+              <li>Casey Jones Strategies is a 501(c)(3) nonprofit — community benefit is our only bottom line.</li>
             </ul>
           </div>
 
           <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", gap: 14, borderLeft: "1px solid var(--rule)", paddingLeft: 24 }}>
-            <Eyebrow>When the time comes</Eyebrow>
+            <Eyebrow>Get involved</Eyebrow>
             <p style={{ margin: 0, color: "var(--fg-muted)" }}>
-              Add your name to the interest list and we'll send public, non-offering
-              updates as compliance review completes.
+              Add your name and we'll keep you updated on community conversations,
+              planning sessions, and partnership opportunities as they develop.
             </p>
-            <Button href="#contact" variant="primary" iconRight="arrow-right" magnetic>Join interest list</Button>
+            <Button href="#contact" variant="primary" iconRight="arrow-right" magnetic>Express interest</Button>
           </div>
         </div>
       </Reveal>

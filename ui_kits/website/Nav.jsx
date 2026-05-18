@@ -15,7 +15,7 @@ function Nav() {
     { href: "#strategy",         label: "Strategy" },
     { href: "#programs",         label: "Programs" },
     { href: "#volunteer",        label: "Volunteer" },
-    { href: "#investment-group", label: "Investment Group" },
+    { href: "#investment-group", label: "Partnerships" },
     { href: "#contact",          label: "Contact" },
   ];
 

@@ -111,7 +111,7 @@ function Hero() {
             <div className="cjs-hero-cta" style={{ display: "flex", flexWrap: "wrap", gap: 12, marginBottom: 40 }}>
               <Button href="#contact" variant="primary" size="lg" magnetic iconRight="arrow-right">Get connected</Button>
               <Button href="#volunteer" variant="ghost" size="lg">Volunteer sign up</Button>
-              <Button href="#investment-group" variant="minimal" size="lg" iconRight="arrow-up-right">Investment Group</Button>
+              <Button href="#investment-group" variant="minimal" size="lg" iconRight="arrow-up-right">Partnerships</Button>
             </div>
           </Reveal>
 
