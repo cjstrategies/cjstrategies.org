@@ -150,8 +150,7 @@ function Trust() {
             </div>
 
             <div style={{ display: "flex", flexWrap: "wrap", gap: 10 }}>
-              <Button variant="primary" iconRight="heart-handshake" magnetic>Donate ${amount} →</Button>
-              <Button variant="ghost">Donate another amount</Button>
+              <Button variant="primary" iconLeft="hourglass">Donation Coming Soon</Button>
             </div>
 
             <small style={{ color: "var(--fg-dim)", paddingTop: 12, borderTop: "1px dashed var(--rule)" }}>

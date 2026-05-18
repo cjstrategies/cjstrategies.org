@@ -82,7 +82,7 @@ function Nav() {
 
         {/* CTA */}
         <div className="cjs-nav-cta" style={{ display: "flex", alignItems: "center", gap: 8 }}>
-          <Button href="#donate" variant="primary" size="md" iconLeft="hourglass">Donation Coming Soon</Button>
+          <Button href="#contact" variant="primary" size="md">Connect With Us</Button>
         </div>
 
         {/* Mobile toggle */}
@@ -121,7 +121,7 @@ function Nav() {
                 }}>{l.label}</a>
             ))}
             <div style={{ marginTop: 16 }}>
-              <Button href="#donate" variant="primary" size="lg" iconLeft="hourglass" style={{ width: "100%", justifyContent: "center" }}>Donation Coming Soon</Button>
+              <Button href="#contact" variant="primary" size="lg" style={{ width: "100%", justifyContent: "center" }}>Connect With Us</Button>
             </div>
           </nav>
         </div>
